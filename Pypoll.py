@@ -26,46 +26,46 @@ for index, row in enumerate(data):
     
     
 # 2) save the list of counties and names voted for
+total_count = len(data) - 1           # total rows in data minus the header row = total votes
 candidates = list()
 counties = list()
+votes = dict()
 
+# 3) calculate the total number of votes cast
 for row in data[1:]:
-    candidates.append(row[2])
-    counties.append(row[1])
+    county = row[1]
+    name = row[2]
+    if county not in counties:
+        counties.append(county)
+    else: 
+        pass
+    if name not in candidates:
+        candidates.append(name)
+    else:
+        pass
+    try:
+        votes[name] += 1
+    except KeyError:
+        votes[name] = 1
 
-candidates = set(candidates)   # Removes the duplicates
-counties = set(counties)       # Removes the duplicates
+# find the winner
+winning_votes = max(votes.values())
 
-# 3) calculate the total number of votes cast in total by county and by name
-total_count = len(data) - 1                        # total rows in data minus the header row
-county_dict = dict().fromkeys(counties, 0)         # total votes cast in each county
-candidate_dict = dict().fromkeys(candidates, 0)    # total votes cast for each candidate
-breakdown_dict = dict().fromkeys(candidates, dict().fromkeys(counties, 0))    # breakdowns of votes cast for each candidate in each county
+for name in votes.keys():
+    print(f"{name} : {round((votes[name]/(len(data)-1)*100), 1)}% ({votes[name]})")
 
-for row in data[1:]: 
-        candidate_dict[row[2]] += 1    # counting votes cast for candidate        
-        county_dict[row[1]] += 1       # counting votes cast in the county
-        breakdown_dict[row[2]][row[1]] += 1    # counting votes cast for candidates in each county
-
-# 5) calculate percentage of votes each name recieved in total and by county
-percent_dict = dict() #.fromkeys(candidates, round(((candidate_dict[name]/total_count)*100), 2))
-for name in candidate_dict.keys():
-    percent_dict[name] = round(((candidate_dict[name]/total_count)*100), 2)
-
-
-# print(percent_dict)
-
-
-# 6) determine which name has the most votes and display as the winner
-winning_votes = max(candidate_dict.values())
-
-for name in candidate_dict:
-    if candidate_dict[name] == winning_votes:
+    if votes[name] == winning_votes:
         global winner 
-        winner = (name, percent_dict[name])
+        winner = (name, round((votes[name]/(len(data)-1)*100), 1))
 
-with open(file_to_save, 'w') as file:
-    file.write(f"{winner[0]} is the winner with {winner[1]}% of the votes.")
-    file.close()
+
+winning_candidate_summary = (
+    f"-------------------------\n"
+    f"Winner: {winner[0]}\n"
+    f"Winning Vote Count: {votes[winner[0]]}\n"
+    f"Winning Percentage: {winner[1]}%\n"
+    f"-------------------------\n"  )
+
+print(winning_candidate_summary)
 
 
