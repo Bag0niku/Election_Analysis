@@ -9,25 +9,34 @@ A Colorado Board of Elections employee has given me the following tasks to compl
  4) Calculate the the percentage of votes each candidate won.
  5) Determine the winner of the election based on popular vote.
 
-## Resources
+### Resources
 - Data Source: election_results.csv
 - Software: Python 3.8.13, Visual Studio Code 1.68.1
 
 ## Summary
 The analysis of the election shows: 
-- 3,6971,100 votes were cast across 3 counties
+- 3,6971,100 votes were cast across 3 counties: Jefferson, Denver, and Arapahoe.
 - The candidates were:
     - Charles Casper Stockham 
     - Diana DeGette 
     - Raymon Anthony Doane 
 
-- The Candidates resultes were as follows:
-    - Charles Casper Stockham  receeved 85,213 votes, 23.0% of the total votes cast.
-    - Diana DeGette : received 272,892 votes, 73.8% of the total votes cast.
-    - Raymon Anthony Doane : received 11,606 votes 3.1% of the total votes cast.
+## Results
+Each Candidates resultes were as follows:
+   - Charles Casper Stockham : 85,213 votes, 23.0% of the total.
+   - Diana DeGette : 272,892 votes, 73.8% of the total.
+   - Raymon Anthony Doane : 11,606 votes 3.1% of the total.
 
-- The winner of the election was: 
-    - Diana DeGette with 73.8% of the total votes cast and 272,892 number of votes.
+
+The winner of the election was: 
+   - Diana DeGette with 73.8% of the total votes cast, 272,892.
   
+## Challenge
+The Pypoll_Challenge.py file is a refactored version of the Pypoll.py script, difference being it calculates the voter turnout in each county aswell. 
+  - Jefferson county : 38,855 voters, 11% of the total.
+  - Denver county : 306,055 voters, 83% of the total.
+  - Arapahoe county : 24,801 voters, 7% of the total.
+
+As is, the code is able to be used to count votes in any election. With a little more refactoring, it would be possible to dig a little more into the data by calculating each candidate's results in each county. This would help determine the general sentiment of each county.
 
 
