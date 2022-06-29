@@ -1,31 +1,21 @@
 import os
 
-# Script Requirements:
-# 1) Total number of votes cast
-# 2) A complete list of candidates who received votes
-# 3) Total number of votes each candidate received
-# 4) Percentage of votes each candidate won
-# 5) The winner of the election based on popular vote
 
-#  ==================================
-
-# Steps to accomplish Requirements: 
-
-# 1) open data file and retrieve the information: 
+#filepaths needed for data retrieval and saving information.
 data_filepath = os.path.join("Resources", "election_results.csv")
 file_to_save =  os.path.join("Analysis", "election_analysis.txt")
-# open and import the file
+
+# open and import the data
 with open(data_filepath, 'r') as file:
     data = file.readlines()
     file.close()
 
 # clean up the data a bit, change the data types from a sting to a list to iterate through and extract information.
 for index, row in enumerate(data):
-    data[index] = row.split(sep=',')       # Changes the row from a string into a list. at the comma's.
+    data[index] = row.split(sep=',')       # Changes the row from a string into a list at the comma's.
     data[index][2] = data[index][2][:-1]   # Removes the '\n' marker at the end of the candidate names
     
-    
-# 2) save the list of counties and names voted for
+# save the list of counties and names voted for
 total_count = len(data) - 1           # total rows in data minus the header row = total votes
 candidates = list()
 counties = list()
